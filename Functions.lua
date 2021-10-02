@@ -1,5 +1,3 @@
-local LogService = game:GetService("LogService")
-
 local Module = {}
 Module.Storadow = {}
 Module.GetService = {}
