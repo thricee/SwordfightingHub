@@ -2,8 +2,8 @@ local Library = loadstring(game:HttpGet('https://raw.githubusercontent.com/Prism
 local Functions = loadstring(game:HttpGet('https://raw.githubusercontent.com/Prismovold/Hub/master/Functions.lua'))();
 local Module = {}
 
-function Module:CreateToggleFlag(Window, Title, FlagName, DefaultValue, Callback)
-    Window:Toggle(Title, DefaultValue, function(State)
+function Module:CreateToggleFlag(Tab, Title, FlagName, DefaultValue, Callback)
+    Tab:Toggle(Title, DefaultValue, function(State)
         Flags[FlagName] = State;
         if Callback then
             Callback()
@@ -11,8 +11,8 @@ function Module:CreateToggleFlag(Window, Title, FlagName, DefaultValue, Callback
     end)
 end
 
-function Module:CreateTextBoxFlag(Window, Title, FlagName, Callback)
-    Window:Textbox(Title, true, function(State)
+function Module:CreateTextBoxFlag(Tab, Title, FlagName, Callback)
+    Tab:Textbox(Title, true, function(State)
         Flags[FlagName] = State;
         if Callback then
             Callback()
@@ -26,7 +26,7 @@ end
 
 local Flag = {}
 Flag.Toggle = Module.CreateToggleFlag
-Flag.TextBox = ''
+Flag.TextBox = Module.CreateTextBoxFlag
 
 function Module:CustomDuels()
     local Window = Library:Window('rkane - Custom Duels',Color3.fromRGB(44, 120, 224), Enum.KeyCode.RightShift)
