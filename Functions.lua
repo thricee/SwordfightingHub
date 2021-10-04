@@ -1,5 +1,6 @@
 local Module = {}
 Module.Storadow = {}
+Module.FTI = {}
 Module.GetService = {}
 
 setmetatable(Module.GetService, {
@@ -18,6 +19,20 @@ function Module:DisableConnections(connection)
             v:Disable()
         end
     end)
+end
+
+function Module:GetPlayerFromShortenedName(name)
+    for i, v in pairs(Service.Players:GetPlayers()) do
+        if v ~= Client then
+            if string.sub(string.lower(v.Name), 1, #name) == string.lower(name) then
+                return v
+            end
+        end
+    end
+end
+
+function Module:Maid()
+    return loadstring(game:HttpGet('https://raw.githubusercontent.com/Quenty/NevermoreEngine/a8a2d2c1ffcf6288ec8d66f65cea593061ba2cf0/Modules/Shared/Events/Maid.lua'))();
 end
 
 function Module:Fail(reason)
@@ -127,5 +142,36 @@ function Storadow:Execute()
     end
 end
 -- END OF STORADOW
+
+-- FTI FRAME
+local FTI = Module.FTI
+
+function FTI:Hit(Handle, Character)
+    for i, v in pairs(Character:GetChildren()) do
+        if v:IsA('BasePart') then
+            firetouchinterest(Handle, v, 0)
+            firetouchinterest(Handle, v, 1)
+        end
+    end
+end
+
+function FTI:Frame(VictimName)
+    local VictimPlayer = Module:GetPlayerFromShortenedName(VictimName)
+    if VictimPlayer then
+        local Character = VictimPlayer.Character
+        if Character then
+            local Tool = Character:FindFirstChildOfClass("Tool")
+            if Tool then
+                local Handle = Tool.Handle
+                if Handle then
+                    FTI:Hit(Handle, Client.Character)
+                end
+            end
+        end
+    end
+end
+
+
+-- END OF FTI FRAME
 
 return Module
