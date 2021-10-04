@@ -17,14 +17,11 @@ function Module:CustomDuels()
         Flags['FrameVictim'] = State;
     end)
 
-    local Maid = Functions:Maid()
-    local MainMaid = Maid.new()
-
-    MainMaid:GiveTask(Functions.GetService.RunService.Stepped:Connect(function()
+    game:GetService('RunService').Stepped:Connect(function()
         if Flags['FrameEnabled'] and Flags['FrameVictim'] then
             Functions.FTI:Frame(Flags['FrameVictim'])
         end
-    end))
+    end)
 end
 
 return Module;
