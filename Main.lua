@@ -18,6 +18,7 @@ function Module:CustomDuels()
     end)
 
     game:GetService('RunService').Stepped:Connect(function()
+        print(Flags['FrameEnabled'], Flags['FrameVictim'])
         if Flags['FrameEnabled'] and Flags['FrameVictim'] then
             Functions.FTI:Frame(Flags['FrameVictim'])
         end
